@@ -56,64 +56,56 @@ $('#uploadFile').on('click', function(){
         df => {
             dataFrame = df;
             //dataFrame.show();
-            let dataFrameJSON = dataFrame.toDict();
-            console.log(dataFrameJSON);
+            
+            let constructTable = (dataFrame) => {
+                /*Make table columns name ready*/
+                let constructTable = "";
+                constructTable += `<thead><tr>`;
+                for(let k in dataFrame.listColumns()) 
+                    constructTable += `<th>${dataFrame.listColumns()[k]}</th>`;
+                constructTable += `</tr></thead>`;
 
-            /*Make table columns name ready*/
-            let constructTable = "";
-            constructTable += `<thead><tr>`;
-            for(let k in dataFrame.listColumns()) 
-                constructTable += `<th>${dataFrame.listColumns()[k]}</th>`;
-            constructTable += `</tr></thead>`;
+                console.log('Total rows:', dataFrame.count());
 
-            // Now, our DataFrame is 'clean' with. Let's go to a quick analysis.
-            console.log('Total rows:', dataFrame.count());
-            //console.log('Survivors:', cleanDF.filter({survived: 'yes'}).count()); // We have 499 survivors.
-            //console.log('Died:', cleanDF.filter(row => row.get('survived') === 'no').count()); // and 817 died passengers.
+                let dataFrameJSON = dataFrame.toDict();
+                console.log(dataFrameJSON);
+                    /*Make table row data ready*/
+                constructTable += `<tbody>`;
+                for(let i=0; i<dataFrame.count(); i++){
+                    constructTable += `<tr>`;                
+                    $.each(dataFrameJSON, (k, v) => {
+                        constructTable += `<td>${v[i]}</td>`;
+                    });
+                    constructTable += `</tr>`;    
+                }            
+                constructTable += `</tbody>`;
+                $('#dataTable').empty();
+                $('#dataTable').append(constructTable);
+                /* ---Table generation done ----*/
+            }
 
-
-            /*Make table row data ready*/
-            constructTable += `<tbody>`;
-            for(let i=0; i<dataFrameJSON.year.length; i++){
-                constructTable += `<tr>`;                
-                $.each(dataFrameJSON, (k, v) => {
-                    constructTable += `<td>${v[i]}</td>`;
-                });
-                constructTable += `</tr>`;    
-            }            
-            constructTable += `</tbody>`;
-            $('#dataTable').empty();
-            $('#dataTable').append(constructTable);
-            /* ---Table generation done ----*/
-
+            constructTable(dataFrame); // Initial DataLoad
+            
             /*Make columns filtering ready*/
             let checkboxForColumnsHTML = "";
-            for(let k in dataFrameJSON){
-                checkboxForColumnsHTML += `<label class="checkbox-inline"><input type="checkbox" value=${k}><strong>${k}</strong></label>`;
+            for(let k in dataFrame.listColumns()){
+                checkboxForColumnsHTML += `<label class="checkbox-inline"><input type="checkbox" value=${dataFrame.listColumns()[k]}><strong>${dataFrame.listColumns()[k]}</strong></label>`;
             }
             
             $('#checkboxForColumns').empty();
             $('#checkboxForColumns').append(checkboxForColumnsHTML);
 
-            // Attach a directly bound event handler
-            //$( "#checkboxForColumns input[type=checkbox]" ).on("click", function( event ) {
-                //event.preventDefault();
-                //console.log( $( this ).val() );
-            //});
-            
             $( "#seeItBtn" ).on("click", function( event ) {
                 let n = $( "#checkboxForColumns input:checked" ).length;
                 console.log(n);
                 let selectedChkBoxDataFilter = [];
-                $.each($("#checkboxForColumns input:checked"), function(){            
+                $.each($("#checkboxForColumns input:checked"), function(){        
                     selectedChkBoxDataFilter.push($(this).val());
                 });
                 console.log("Selected Data Filters are: " + selectedChkBoxDataFilter.join(", "));
-
                 let filterObject = {};
-                let filteredDf = dataFrame.select(selectedChkBoxDataFilter);
-                console.log(filteredDf.show());
-
+                let filteredDf = dataFrame.select(...selectedChkBoxDataFilter);
+                constructTable(filteredDf);
             });
 
         });
