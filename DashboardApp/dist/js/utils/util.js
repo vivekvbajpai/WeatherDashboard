@@ -47,7 +47,7 @@ class Util{
 	    $('[id='+endDatePickerId+']').attr('min', dateMin);
 	    $('[id='+endDatePickerId+']').attr('max', dateMax);
 	    $('[id='+endDatePickerId+']').attr('value', dateMax);
-	    $('#dateRangeFilterDiv').show();
+	    
 	}
 
 	/* ---This function helps in getting filename after upload event ----*/
@@ -65,7 +65,7 @@ class Util{
 	    /*Make columns filtering ready*/
 	    let checkboxForColumnsHTML = "";
 	    for(let k in dataFrame.listColumns()){
-	        if(dataFrame.listColumns()[k] === 'date' || dataFrame.listColumns()[k] === 'hour'){
+	        if(dataFrame.listColumns()[k] === 'date' || dataFrame.listColumns()[k] === 'hour' || dataFrame.listColumns()[k] === 'city'){
 
 	        }else
 	            checkboxForColumnsHTML += `<label class="checkbox-inline"><input type="checkbox" value=${dataFrame.listColumns()[k]}><strong>${dataFrame.listColumns()[k]}</strong></label>`;

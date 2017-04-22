@@ -40,31 +40,13 @@
                 <a class="navbar-brand" href="index.html">TEAM-18 Dashboard (Environment)</a>
             </div>
             <!-- /.navbar-header -->
-
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
             <!-- /.navbar-top-links -->
         </nav>
 
         <div id="page-wrapper">
             <div class="row">
+                <div class="col-lg-4">  
+                </div>
                 <div class="col-lg-4">
                     <div class="clearfix"></div>                  
                     <div class="panel panel-green">
@@ -83,146 +65,143 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">  
-                    <div class="clearfix"></div>                  
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="huge">Total 5 cities dataset</div>
-                                    <div>( Select the city! )</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer">                            
-                            <div class="form-group">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"><strong>Chicago</strong>
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"><strong>New york</strong>
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"><strong>Boston</strong>
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"><strong>Dallas</strong>
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"><strong>Seattle</strong>
-                                </label>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div id="add" class="col-lg-4">
                 </div>
             </div>
 
             <div class="row">
                 <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="huge">Data representation</div>
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="huge">Data representation</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-lg-9" style="height: 600px;overflow: scroll;">
+                                <!-- /.panel -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="huge"><span id="cityName"></span>5 CITIES DATA</div>
+
+                                    </div>
+                                    <!-- /.panel-heading -->
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive">
+                                                    <table id="dataTable" class="table table-bordered table-hover table-striped">
+                                                        <!-- table content will be appended dynamically -->
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-responsive -->
+                                            </div>
+                                            <!-- /.col-lg-12 -->
+                                        </div>
+                                        <!-- /.row -->
+                                    </div>
+                                    <!-- /.panel-body -->
+                                </div>
+                                <!-- /.panel -->
+                            </div>
+                            <!-- /.col-lg-9 -->
+                            <div class="col-lg-3">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="huge">Data Filter</div>
+                                                <div>( Select different columns! )</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer" > 
+                                        <div class="form-group" id="checkboxForColumns">                          
+                                        <!-- Checkbox dynamically created-->
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <p>
+                                            <button id="addFilterBtn" class="btn btn-default">Add Filter</button> 
+                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="panel-footer">
-                                <div class="row">
-                <div class="col-lg-9">
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="huge"><span id="cityName"></span> city based DATA</div>
-
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive">
-                                        <table id="dataTable" class="table table-bordered table-hover table-striped">
-                                            <!-- table content will be appended dynamically -->
-                                        </table>
+                                <div class="panel panel-green">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="huge">Row Filter</div>
+                                                <div>( Select different row filters! )</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- /.table-responsive -->
+                                    <div class="panel-footer" > 
+                                        <div class="form-group" id="dateRangeFilterDiv">                          
+                                            <label for="startDate">
+                                                From date:
+                                                <input type="date" id="startDate">
+                                            </label>
+                                            <label for="endDate">
+                                                To date:
+                                                <input type="date" id="endDate">
+                                            </label>
+                                        </div>
+                                        <div class="form-group" id="checkboxForCities">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="Chicago"><strong>Chicago</strong>
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="New York"><strong>New york</strong>
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="Boston"><strong>Boston</strong>
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="Dallas"><strong>Dallas</strong>
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="Seattle"><strong>Seattle</strong>
+                                            </label>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
                                 </div>
-                                <!-- /.col-lg-12 -->
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-9 -->
-                <div class="col-lg-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="huge">Data Filter</div>
-                                    <div>( Select different columns! )</div>
+                                <div class="panel panel-yellow">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="huge">Plots</div>
+                                                <div>( Select the plots! )</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">                            
+                                        <div class="form-group" id="checkboxForCharts">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="bar">Bar Graph
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="line">Line Chart
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="pie">Pie Chart
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="stack">Stack Chart
+                                            </label>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
                                 </div>
+                                <button id="seeItBtn" class="btn btn-default">See it!</button> 
+                                <a href="#dataVisualizationDiv">Click for charts</a>
                             </div>
-                        </div>
-                        <div class="panel-footer" > 
-                            <div class="form-group" id="checkboxForColumns">                          
-                            <!-- Checkbox dynamically created-->
-                            </div>
-                            <div class="clearfix"></div>
-                            <p>
-                                <button id="addFilterBtn" class="btn btn-default">Add Filter</button> 
-                            </p>
-                            <div class="form-group" id="dateRangeFilterDiv">                          
-                                <label for="startDate">
-                                    From date:
-                                    <input type="date" id="startDate">
-                                </label>
-                                <label for="endDate">
-                                    To date:
-                                    <input type="date" id="endDate">
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="huge">Plots</div>
-                                    <div>( Select the plots! )</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer">                            
-                            <div class="form-group" id="checkboxForCharts">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="bar">Bar Graph
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="line">Line Chart
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="pie">Pie Chart
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="stack">Stack Chart
-                                </label>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <button id="seeItBtn" class="btn btn-default">See it!</button> 
-                    <a href="#dataVisualizationDiv">Click for charts</a>
-                </div>
                 <!-- /.col-lg-4 -->
-            </div>
-                            </div>
                         </div>
+                    </div>
+                </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
@@ -253,16 +232,8 @@
     </div>
 
 
-    <div class="row" id="canvasDivBar">
-        <div class="col-lg-6">  
-            <canvas id="minBarCanvas" width="140" height="140"></canvas> 
-        </div>
-		<div class="col-lg-6">
-            <canvas id="maxBarCanvas" width="140" height="140"></canvas>                 
-        </div>
-        <div class="col-lg-6">  
-            <canvas id="avgBarCanvas" width="140" height="140"></canvas> 
-        </div>
+    <div class="row" id="canvasDivBar" style="margin-left: 0;margin-right: 0;">
+ 
     </div>
     <div class="row">
         <div class="col-lg-6">

@@ -10,7 +10,7 @@ class BarChart{
 	showGraph(){
 		let dataset = this.createDataset();
 		let barCanvas = document.getElementById(this._id);
-		this._dataframe.show();
+		//this._dataframe.show();
 		this._chart = new Chart(barCanvas,{
 											type: 'bar',
 	data: {

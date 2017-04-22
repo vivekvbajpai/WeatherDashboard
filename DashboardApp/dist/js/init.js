@@ -3,6 +3,8 @@
 $(function() {
     $('#side-menu').metisMenu();
     $('#dateRangeFilterDiv').hide();
+    $('#checkboxForCities').hide();
+    
 });
 
 //Loads the correct sidebar on window load,

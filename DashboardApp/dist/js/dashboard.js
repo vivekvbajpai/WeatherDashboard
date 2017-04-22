@@ -40,19 +40,29 @@ $( "#addFilterBtn" ).on("click", function( event ) {
     
     filteredDf = dataFrame.select(...selectedChkBoxDataFilter);
     Util.constructTable(filteredDf, "dataTable");
+    $('#checkboxForCities').show();
+    $('#dateRangeFilterDiv').show();
+
+});
+
+$( "#seeItBtn" ).on("click", function( event ) {
 
     filteredDf = filteredDf
         .filter(row => 
             (Util.dateConv(row.get('date')) >= Util.dateConv($('#startDate').val())) 
         && (Util.dateConv(row.get('date')) <= Util.dateConv($('#endDate').val())) 
-        );
-        //filteredDf.count();
-    console.log("hello-->",filteredDf.count());
+    );
+
+    let citychkBoxDataFilter = [];
+    $.each($("#checkboxForCities input:checked"), function(){        
+        citychkBoxDataFilter.push($(this).val());
+    });
+
+    filteredDf = filteredDf
+        .filter(row => $.inArray(row.get('city'),citychkBoxDataFilter) >= 0
+    );
+
     Util.constructTable(filteredDf, "dataTable");
-
-});
-
-$( "#seeItBtn" ).on("click", function( event ) {
 
     $.each($("#checkboxForCharts input:checked"), function(){        
         let checkedChart = $(this).val();
@@ -68,13 +78,17 @@ $( "#seeItBtn" ).on("click", function( event ) {
                 }else{
 
                     console.log("DataSelected",dataSelected);
+                    
+                    let htmlHeadingForEachColumn = `<div class="huge">${dataSelected}</div>`
+                    $("#canvasDivBar").append(htmlHeadingForEachColumn)
+                    
                     let htmlMinBarCanvas = '<div class="col-lg-4">'  
                                         + '<canvas id="minBarCanvas'+dataSelected+'" ></canvas>' 
                                     + '</div>';
                     $("#canvasDivBar").append(htmlMinBarCanvas)
 
                     let minBarChart = new MinBarChart("minBarCanvas"+dataSelected, dataSelected, filteredDf)
-
+					minBarChart.showGraph();
 
                     let htmlMaxBarCanvas = '<div class="col-lg-4">'  
                                         + '<canvas id="maxBarCanvas'+dataSelected+'" ></canvas>' 
@@ -82,13 +96,14 @@ $( "#seeItBtn" ).on("click", function( event ) {
 
                     $("#canvasDivBar").append(htmlMaxBarCanvas)
                     let maxBarChart = new MaxBarChart("maxBarCanvas"+dataSelected, dataSelected, filteredDf)
-
+					maxBarChart.showGraph();
                     
                     let htmlAvgBarCanvas = '<div class="col-lg-4">'  
                                         + '<canvas id="avgBarCanvas'+dataSelected+'" ></canvas>' 
                                     + '</div>';
                     $("#canvasDivBar").append(htmlAvgBarCanvas)
                     let avgBarChart = new AvgBarChart("avgBarCanvas"+dataSelected, dataSelected, filteredDf)    
+					avgBarChart.showGraph();
                 }
 
                 
