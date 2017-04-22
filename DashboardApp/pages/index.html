@@ -229,10 +229,37 @@
         </div>
         <!-- /#page-wrapper -->
     </div>
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <canvas id="lineCanvas" width="140" height="140"></canvas>                 
+        </div>
+        <div class="col-lg-6">  
+            <canvas id="minBarCanvas" width="140" height="140"></canvas> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <canvas id="maxBarCanvas" width="140" height="140"></canvas>                 
+        </div>
+        <div class="col-lg-6">  
+            <canvas id="avgBarCanvas" width="140" height="140"></canvas> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <canvas id="pieChartCanvas" width="140" height="140"></canvas>                 
+        </div>
+        <div class="col-lg-6">
+        </div>
+    </div>
     <!-- /#wrapper -->
 
     <!-- Dataframe -->
     <script src="../vendor/dataframe/dataframe.js"></script>
+
+    <!-- Dataframe -->
+    <script src="../vendor/chartjs/Chart.js"></script>
 
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>
@@ -243,8 +270,11 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
     
+    <script src="../dist/js/lineChart.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/init.js"></script>
+
  
 </body>
 

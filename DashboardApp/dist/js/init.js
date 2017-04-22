@@ -26,6 +26,7 @@ $(function() {
         }
     });
 
+
     var url = window.location;
     // var element = $('ul.nav a').filter(function() {
     //     return this.href == url;
@@ -65,10 +66,10 @@ $('#uploadFile').on('click', function(){
                     constructTable += `<th>${dataFrame.listColumns()[k]}</th>`;
                 constructTable += `</tr></thead>`;
 
-                console.log('Total rows:', dataFrame.count());
+                //console.log('Total rows:', dataFrame.count());
 
                 let dataFrameJSON = dataFrame.toDict();
-                console.log(dataFrameJSON);
+                //console.log(dataFrameJSON);
                     /*Make table row data ready*/
                 constructTable += `<tbody>`;
                 for(let i=0; i<dataFrame.count(); i++){
@@ -97,15 +98,16 @@ $('#uploadFile').on('click', function(){
 
             $( "#seeItBtn" ).on("click", function( event ) {
                 let n = $( "#checkboxForColumns input:checked" ).length;
-                console.log(n);
+                //console.log(n);
                 let selectedChkBoxDataFilter = [];
                 $.each($("#checkboxForColumns input:checked"), function(){        
                     selectedChkBoxDataFilter.push($(this).val());
                 });
-                console.log("Selected Data Filters are: " + selectedChkBoxDataFilter.join(", "));
+                //console.log("Selected Data Filters are: " + selectedChkBoxDataFilter.join(", "));
                 let filterObject = {};
                 let filteredDf = dataFrame.select(...selectedChkBoxDataFilter);
                 constructTable(filteredDf);
+
             });
 
         });
