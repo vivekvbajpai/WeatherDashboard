@@ -204,6 +204,7 @@
                         </div>
                     </div>
                     <button id="seeItBtn" class="btn btn-default">See it!</button> 
+                    <a href="#dataVisualizationDiv">Click for charts</a>
                 </div>
                 <!-- /.col-lg-4 -->
             </div>
@@ -212,9 +213,9 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            
+            <a href="#page-wrapper">Dashboard</a>
             <!-- /.row -->
-            <div class="row">
+            <div class="row" id="dataVisualizationDiv">
                 <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <div class="row">
@@ -232,8 +233,15 @@
     </div>
     
     <div class="row">
+        <div class="col-lg-12">
+            <canvas id="lineCanvas" style="display: block;height: 768px;width: 96%;"></canvas>                 
+        </div>
+    </div>
+
+
+    <div class="row">
         <div class="col-lg-6">
-            <canvas id="lineCanvas" width="140" height="140"></canvas>                 
+            <canvas id="lineCanvas1" width="140" height="140"></canvas>                 
         </div>
         <div class="col-lg-6">  
             <canvas id="minBarCanvas" width="140" height="140"></canvas> 
@@ -270,8 +278,12 @@
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <script src="../dist/js/utils/util.js"></script>
     
     <script src="../dist/js/lineChart.js"></script>
+
+    <script src="../dist/js/barChart.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/init.js"></script>

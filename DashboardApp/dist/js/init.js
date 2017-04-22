@@ -102,6 +102,8 @@ $('#uploadFile').on('click', function(){
                 let n = $( "#checkboxForColumns input:checked" ).length;
                 //console.log(n);
                 let selectedChkBoxDataFilter = [];
+                selectedChkBoxDataFilter.push("date");
+                selectedChkBoxDataFilter.push("city");
                 $.each($("#checkboxForColumns input:checked"), function(){        
                     selectedChkBoxDataFilter.push($(this).val());
                 });
@@ -117,7 +119,11 @@ $('#uploadFile').on('click', function(){
                 let filteredDf = dataFrame.select(...selectedChkBoxDataFilter);
                 //console.log(filteredDf.listColumns());
                 constructTable(filteredDf);
+                let charty = new LineChart("lineCanvas",filteredDf.filter(row => row.get("city") === "Chicago"));
+                charty.showGraph();
 
+                let barChart = new BarChart("minBarCanvas","temperature","min",filteredDf);
+                barChart.showGraph();
             });
 
             $( "#seeItBtn" ).on("click", function( event ) {
