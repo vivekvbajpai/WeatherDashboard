@@ -64,6 +64,9 @@ $( "#seeItBtn" ).on("click", function( event ) {
 
     Util.constructTable(filteredDf, "dataTable");
 
+    //create a BarChartFactory
+        let barChartFactory = new BarChartFactory();
+
     $.each($("#checkboxForCharts input:checked"), function(){        
         let checkedChart = $(this).val();
         
@@ -78,7 +81,8 @@ $( "#seeItBtn" ).on("click", function( event ) {
                 }else{
 
                     console.log("DataSelected",dataSelected);
-                    
+                
+
                     let htmlHeadingForEachColumn = `<div class="huge">${dataSelected}</div>`
                     $("#canvasDivBar").append(htmlHeadingForEachColumn)
                     
@@ -87,7 +91,7 @@ $( "#seeItBtn" ).on("click", function( event ) {
                                     + '</div>';
                     $("#canvasDivBar").append(htmlMinBarCanvas)
 
-                    let minBarChart = new MinBarChart("minBarCanvas"+dataSelected, dataSelected, filteredDf)
+                    let minBarChart = barChartFactory.getBarChart("min","minBarCanvas"+dataSelected, dataSelected, filteredDf);
 					minBarChart.showGraph();
 
                     let htmlMaxBarCanvas = '<div class="col-lg-4">'  
@@ -95,14 +99,14 @@ $( "#seeItBtn" ).on("click", function( event ) {
                                     + '</div>';
 
                     $("#canvasDivBar").append(htmlMaxBarCanvas)
-                    let maxBarChart = new MaxBarChart("maxBarCanvas"+dataSelected, dataSelected, filteredDf)
+                    let maxBarChart = barChartFactory.getBarChart("max","maxBarCanvas"+dataSelected, dataSelected, filteredDf);
 					maxBarChart.showGraph();
                     
                     let htmlAvgBarCanvas = '<div class="col-lg-4">'  
                                         + '<canvas id="avgBarCanvas'+dataSelected+'" ></canvas>' 
                                     + '</div>';
                     $("#canvasDivBar").append(htmlAvgBarCanvas)
-                    let avgBarChart = new AvgBarChart("avgBarCanvas"+dataSelected, dataSelected, filteredDf)    
+                    let avgBarChart = barChartFactory.getBarChart("avg","avgBarCanvas"+dataSelected, dataSelected, filteredDf);   
 					avgBarChart.showGraph();
                 }
 
