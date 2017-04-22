@@ -27,6 +27,7 @@ $(function() {
         }
     });
 
+
     var url = window.location;
     // var element = $('ul.nav a').filter(function() {
     //     return this.href == url;
@@ -42,4 +43,5 @@ $(function() {
             break;
         }
     }
+});
 });
