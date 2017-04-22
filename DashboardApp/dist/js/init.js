@@ -57,7 +57,6 @@ $('#uploadFile').on('click', function(){
         df => {
             dataFrame = df;
             //dataFrame.show();
-            
             let constructTable = (dataFrame) => {
                 /*Make table columns name ready*/
                 let constructTable = "";
@@ -84,30 +83,45 @@ $('#uploadFile').on('click', function(){
                 $('#dataTable').append(constructTable);
                 /* ---Table generation done ----*/
             }
-
+            //dataFrame.show();
             constructTable(dataFrame); // Initial DataLoad
             
             /*Make columns filtering ready*/
             let checkboxForColumnsHTML = "";
             for(let k in dataFrame.listColumns()){
-                checkboxForColumnsHTML += `<label class="checkbox-inline"><input type="checkbox" value=${dataFrame.listColumns()[k]}><strong>${dataFrame.listColumns()[k]}</strong></label>`;
+                if(dataFrame.listColumns()[k] === 'Date' || dataFrame.listColumns()[k] === 'hour'){
+
+                }else
+                    checkboxForColumnsHTML += `<label class="checkbox-inline"><input type="checkbox" value=${dataFrame.listColumns()[k]}><strong>${dataFrame.listColumns()[k]}</strong></label>`;
             }
             
             $('#checkboxForColumns').empty();
             $('#checkboxForColumns').append(checkboxForColumnsHTML);
 
-            $( "#seeItBtn" ).on("click", function( event ) {
+            $( "#addFilterBtn" ).on("click", function( event ) {
                 let n = $( "#checkboxForColumns input:checked" ).length;
                 //console.log(n);
                 let selectedChkBoxDataFilter = [];
                 $.each($("#checkboxForColumns input:checked"), function(){        
                     selectedChkBoxDataFilter.push($(this).val());
                 });
+
                 //console.log("Selected Data Filters are: " + selectedChkBoxDataFilter.join(", "));
                 let filterObject = {};
+
+                //dataFrame.show();
+                //console.log(dataFrame.listColumns());
+                //console.log("Selected Data Filters are: " + selectedChkBoxDataFilter.join(", "));
+                //console.log("Selected Data Filters are: " + selectedChkBoxDataFilter);
+
                 let filteredDf = dataFrame.select(...selectedChkBoxDataFilter);
+                //console.log(filteredDf.listColumns());
                 constructTable(filteredDf);
 
+            });
+
+            $( "#seeItBtn" ).on("click", function( event ) {
+            
             });
 
         });
