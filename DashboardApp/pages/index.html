@@ -77,8 +77,8 @@
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <input type="file" hidden id="datafile"> 
-                            <button id="uploadFile" class="btn btn-default">Upload</button>                           
+                            <input type="file" hidden id="datafile" style="display:inline;"> 
+                            <button id="uploadFile" class="btn btn-default btn-inline">Upload</button>                           
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -173,7 +173,20 @@
                             <!-- Checkbox dynamically created-->
                             </div>
                             <div class="clearfix"></div>
-                            <button id="addFilterBtn" class="btn btn-default">Add Filter</button> 
+                            <p>
+                                <button id="addFilterBtn" class="btn btn-default">Add Filter</button> 
+                            </p>
+                            <div class="form-group" id="dateRangeFilterDiv">                          
+                                <label for="startDate">
+                                    From date:
+                                    <input type="date" id="startDate">
+                                </label>
+                                <label for="endDate">
+                                    To date:
+                                    <input type="date" id="endDate">
+                                </label>
+                            </div>
+
                         </div>
                     </div>
                     <div class="panel panel-yellow">
@@ -212,7 +225,7 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            
+
             <!-- /.row -->
             <div class="row">
                 <div class="panel panel-primary">
@@ -245,6 +258,9 @@
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
     
     <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/Utils/util.js"></script>
+    <script src="../dist/js/dataFrame.js"></script>
+    <script src="../dist/js/dashboard.js"></script>
     <script src="../dist/js/init.js"></script>
  
 </body>
