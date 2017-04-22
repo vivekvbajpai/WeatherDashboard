@@ -29,7 +29,7 @@ $( "#addFilterBtn" ).on("click", function( event ) {
     let n = $( "#checkboxForColumns input:checked" ).length;
     //console.log(n);
     let selectedChkBoxDataFilter = [];
-    selectedChkBoxDataFilter.push("Date");
+    selectedChkBoxDataFilter.push("date");
     $.each($("#checkboxForColumns input:checked"), function(){        
         selectedChkBoxDataFilter.push($(this).val());
     });
@@ -37,15 +37,10 @@ $( "#addFilterBtn" ).on("click", function( event ) {
     let filteredDf = dataFrame.select(...selectedChkBoxDataFilter);
     Util.constructTable(filteredDf, "dataTable");
 
-    let dateConv = (dateStr) => {
-        let dateArray = dateStr.split("-")
-        let newDate = dateArray[0]+dateArray[1]+dateArray[2]
-        return newDate
-    }
     filteredDf = filteredDf
         .filter(row => 
-            (dateConv(row.get('Date')) >= dateConv($('#startDate').val())) 
-        && (dateConv(row.get('Date')) <= dateConv($('#endDate').val())) 
+            (Util.dateConv(row.get('date')) >= Util.dateConv($('#startDate').val())) 
+        && (Util.dateConv(row.get('date')) <= Util.dateConv($('#endDate').val())) 
         );
         //filteredDf.count();
     console.log("hello-->",filteredDf.count());

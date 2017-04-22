@@ -36,13 +36,18 @@ class Util{
 	static setDateRangeForDataFilter(dataFrame, dateRangeFilterDivId, startDatePickerId, endDatePickerId){
 
 	    let dataFrameJSONForDate = dataFrame.toDict();
-	    let dateMin = dataFrameJSONForDate.Date[0];
-	    let dateMax = dataFrameJSONForDate.Date[dataFrame.count()-1];
+	    let dateMin = dataFrameJSONForDate.date[0];
+	    console.log("dateMin::>",dateMin);
+	    let dateMax = dataFrameJSONForDate.date[dataFrame.count()-1];
+	    console.log("dateMin::>",dateMax);
 	    $('[id='+dateRangeFilterDivId+']').show();
+	    $('[id='+startDatePickerId+']').attr('value', dateMin);
 	    $('[id='+startDatePickerId+']').attr('min', dateMin);
 	    $('[id='+startDatePickerId+']').attr('max', dateMax);
 	    $('[id='+endDatePickerId+']').attr('min', dateMin);
 	    $('[id='+endDatePickerId+']').attr('max', dateMax);
+	    $('[id='+endDatePickerId+']').attr('value', dateMax);
+	    $('#dateRangeFilterDiv').show();
 	}
 
 	/* ---This function helps in getting filename after upload event ----*/
@@ -56,11 +61,11 @@ class Util{
 	}
 
 	/* ---This function helps in getting checkbox for Column slicing ----*/
-	static getCheckBoxFromDataFrame(checkboxForColumnsDivId) {
+	static getCheckBoxFromDataFrame(dataFrame, checkboxForColumnsDivId) {
 	    /*Make columns filtering ready*/
 	    let checkboxForColumnsHTML = "";
 	    for(let k in dataFrame.listColumns()){
-	        if(dataFrame.listColumns()[k] === 'Date' || dataFrame.listColumns()[k] === 'hour'){
+	        if(dataFrame.listColumns()[k] === 'date' || dataFrame.listColumns()[k] === 'hour'){
 
 	        }else
 	            checkboxForColumnsHTML += `<label class="checkbox-inline"><input type="checkbox" value=${dataFrame.listColumns()[k]}><strong>${dataFrame.listColumns()[k]}</strong></label>`;
