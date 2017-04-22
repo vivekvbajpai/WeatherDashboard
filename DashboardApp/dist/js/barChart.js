@@ -1,10 +1,9 @@
 
 class BarChart{
 
-	constructor(id,column,type,dataframe){
+	constructor(id,column,dataframe){
 		this._id = id;
 		this._column = column;
-		this._type = type;
 		this._dataframe = dataframe;
 	}
 
@@ -28,7 +27,7 @@ class BarChart{
 		let cities = this._dataframe.unique("city").toArray("city");
 
 		datasetItem["borderWidth"] = 1;
-		datasetItem["label"] = this._type + " " + this._column;
+		datasetItem["label"] = this.getChartType() + " " + this._column;
 
 		datasetItem["borderColor"] = [
                 'rgba(255,99,132,1)',
@@ -50,20 +49,22 @@ class BarChart{
 		let data =[];
 		for(let i= 0; i<cities.length; i++){
 			let cityDF = columnDataSet.filter(row => row.get("city") === cities[i]);
-			if(this._type==="min"){
-				data[i] = cityDF.stat.min(this._column);
-			}
-			else if(this._type == "max"){
-				data[i] = cityDF.stat.max(this._column);
-			}else if(this._type == "avg"){
-				data[i] = cityDF.stat.mean(this._column);
-			}
+			
+			data[i] = this.calculateFunction(cityDF,this._column);
+			
 
 		}
 		datasetItem["data"] = data;
 		return [datasetItem];
-	}
+		}
 
+		getChartType(){
+			return "base";
+		}
+
+		calculateFunction(df,column){
+			return df.stat.sum(column);
+		}
 }
 
 //let charty = new LineChart("lineCanvas","",["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],[12, 19, 3, 5, 2, 3]);
