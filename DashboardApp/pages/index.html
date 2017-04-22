@@ -199,18 +199,18 @@
                             </div>
                         </div>
                         <div class="panel-footer">                            
-                            <div class="form-group">
+                            <div class="form-group" id="checkboxForCharts">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox">Bar Graph
+                                    <input type="checkbox" value="bar">Bar Graph
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox">Line Chart
+                                    <input type="checkbox" value="line">Line Chart
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox">Pie Chart
+                                    <input type="checkbox" value="pie">Pie Chart
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox">Stack Chart
+                                    <input type="checkbox" value="stack">Stack Chart
                                 </label>
                             </div>
                             <div class="clearfix"></div>
@@ -247,22 +247,17 @@
     </div>
     
     <div class="row">
-        <div class="col-lg-12">
-            <canvas id="lineCanvas" style="display: block;height: 768px;width: 96%;"></canvas>                 
+        <div class="col-lg-12" id="canvasDivLine">
+            
         </div>
     </div>
 
 
-    <div class="row">
-        <div class="col-lg-6">
-            <canvas id="lineCanvas1" width="140" height="140"></canvas>                 
-        </div>
+    <div class="row" id="canvasDivBar">
         <div class="col-lg-6">  
             <canvas id="minBarCanvas" width="140" height="140"></canvas> 
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
+		<div class="col-lg-6">
             <canvas id="maxBarCanvas" width="140" height="140"></canvas>                 
         </div>
         <div class="col-lg-6">  
@@ -298,6 +293,9 @@
     <script src="../dist/js/lineChart.js"></script>
 
     <script src="../dist/js/barChart.js"></script>
+	<script src="../dist/js/minBarChart.js"></script>
+	<script src="../dist/js/maxBarChart.js"></script>
+	<script src="../dist/js/avgBarChart.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/dataFrame.js"></script>

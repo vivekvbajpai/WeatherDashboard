@@ -8,15 +8,15 @@ class LineChart{
 
 	showGraph(){
 		let dataset = this.createDataset();
-		//console.log(dataset);
+		console.log(dataset);
 		let lineCanvas = document.getElementById(this._id);
 		this._chart = new Chart(lineCanvas,{
-											type: 'line',
-	data: {
-    	labels: this._dataframe.toArray("date"),
-    	datasets: dataset 
-			}
-		});
+			type: 'line',
+			data: {
+	    		labels: this._dataframe.toArray("date"),
+	    		datasets: dataset 
+				}
+			});
 	}
 
 	createDataset(){

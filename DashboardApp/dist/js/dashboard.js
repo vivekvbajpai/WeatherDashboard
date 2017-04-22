@@ -6,6 +6,7 @@ class Dashboard {
 }
 
 var dataFrame = dfjs.DataFrame;
+var filteredDf = dfjs.DataFrame;
 
 /*EVENT HANDLERS IN DASHBOARD **/
 $('#uploadFile').on('click', function(){
@@ -25,16 +26,19 @@ $('#uploadFile').on('click', function(){
 		);    
 });
 
+var selectedChkBoxDataFilter = [];
+
 $( "#addFilterBtn" ).on("click", function( event ) {
     let n = $( "#checkboxForColumns input:checked" ).length;
     //console.log(n);
-    let selectedChkBoxDataFilter = [];
+    selectedChkBoxDataFilter = [];
     selectedChkBoxDataFilter.push("date");
+    selectedChkBoxDataFilter.push("city");
     $.each($("#checkboxForColumns input:checked"), function(){        
         selectedChkBoxDataFilter.push($(this).val());
     });
     
-    let filteredDf = dataFrame.select(...selectedChkBoxDataFilter);
+    filteredDf = dataFrame.select(...selectedChkBoxDataFilter);
     Util.constructTable(filteredDf, "dataTable");
 
     filteredDf = filteredDf
@@ -49,5 +53,61 @@ $( "#addFilterBtn" ).on("click", function( event ) {
 });
 
 $( "#seeItBtn" ).on("click", function( event ) {
-    
+
+    $.each($("#checkboxForCharts input:checked"), function(){        
+        let checkedChart = $(this).val();
+        
+        if(checkedChart === "bar"){
+
+            $("#canvasDivBar").empty();
+            
+            selectedChkBoxDataFilter.forEach(function(dataSelected) {
+                
+                if(dataSelected === "date" || dataSelected === "city"){
+
+                }else{
+
+                    console.log("DataSelected",dataSelected);
+                    let htmlMinBarCanvas = '<div class="col-lg-4">'  
+                                        + '<canvas id="minBarCanvas'+dataSelected+'" ></canvas>' 
+                                    + '</div>';
+                    $("#canvasDivBar").append(htmlMinBarCanvas)
+
+                    let minBarChart = new MinBarChart("minBarCanvas"+dataSelected, dataSelected, filteredDf)
+
+
+                    let htmlMaxBarCanvas = '<div class="col-lg-4">'  
+                                        + '<canvas id="maxBarCanvas'+dataSelected+'" ></canvas>' 
+                                    + '</div>';
+
+                    $("#canvasDivBar").append(htmlMaxBarCanvas)
+                    let maxBarChart = new MaxBarChart("maxBarCanvas"+dataSelected, dataSelected, filteredDf)
+
+                    
+                    let htmlAvgBarCanvas = '<div class="col-lg-4">'  
+                                        + '<canvas id="avgBarCanvas'+dataSelected+'" ></canvas>' 
+                                    + '</div>';
+                    $("#canvasDivBar").append(htmlAvgBarCanvas)
+                    let avgBarChart = new AvgBarChart("avgBarCanvas"+dataSelected, dataSelected, filteredDf)    
+                }
+
+                
+        
+              });
+                        
+        }else if(checkedChart === "line"){
+
+            let htmlLine = `<canvas id="lineCanvas"></canvas>`
+            $("#canvasDivLine").empty();
+            $("#canvasDivLine").append(htmlLine);
+            //filteredDf.show();
+            let lineChart = new LineChart("lineCanvas", filteredDf.filter(row => row.get('city') === "Chicago"));
+            lineChart.showGraph();
+
+        }else if(checkedChart === "pie"){
+
+        }else if(checkedChart === "stack"){
+
+        }
+    });
 });
